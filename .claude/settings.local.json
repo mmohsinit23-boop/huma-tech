@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(npm run *)",
+      "WebFetch(domain:huma-tech.vercel.app)"
+    ]
+  }
+}
