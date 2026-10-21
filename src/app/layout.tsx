@@ -12,6 +12,10 @@ const inter = Inter({
   display: 'swap',
 });
 
+// Google AdSense — loaded once, on every page.
+// Replace the client ID with your own from https://adSense.google.com
+const AD_CLIENT = 'ca-pub-2702404301354316';
+
 export const metadata: Metadata = {
   title: "Huma Tech - Your World of Technology, Simplified",
   description: "Huma Tech provides easy-to-understand technology news, guides, reviews and useful information for technology users worldwide.",
@@ -44,6 +48,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.variable} font-sans antialiased`}>
+        {/* Google AdSense — auto ads + verification meta */}
+        <meta name="adsense-client" content={AD_CLIENT} />
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${AD_CLIENT}`}
+          crossOrigin="anonymous"
+        />
         <ThemeProvider>
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
             <Header />

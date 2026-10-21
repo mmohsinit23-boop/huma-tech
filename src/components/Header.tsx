@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useTheme } from '@/lib/ThemeContext';
 import SearchModal from './SearchModal';
+import Ad, { AD_SLOTS } from './Ad';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -51,9 +52,9 @@ export default function Header() {
           borderBottom: `1px solid ${scrolled ? 'var(--border-color)' : 'transparent'}`,
         }}
       >
-        {/* Top ad banner */}
-        <div className="ad-placeholder h-[50px] mx-auto max-w-5xl mt-1 mb-1 hidden lg:flex text-xs">
-          Advertisement
+        {/* Top ad banner (leaderboard) */}
+        <div className="mx-auto max-w-5xl mt-1 mb-1 hidden lg:flex justify-center text-xs">
+          <Ad slot={AD_SLOTS.HEADER_TOP} style={{ height: '50px', width: '100%', maxWidth: '728px' }} />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6">

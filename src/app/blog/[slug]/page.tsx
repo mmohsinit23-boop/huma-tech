@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Metadata } from 'next';
 import ArticleCard from '@/components/ArticleCard';
 import ReadingProgress from '@/components/ReadingProgress';
+import Ad, { AD_SLOTS } from '@/components/Ad';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -156,8 +157,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               </div>
 
               {/* Bottom Ad */}
-              <div className="ad-placeholder h-[120px] w-full mt-12 mb-12">
-                Advertisement
+              <div className="h-[120px] w-full mt-12 mb-12 flex justify-center">
+                <Ad slot={AD_SLOTS.ARTICLE_BOTTOM_LEADERBOARD} style={{ height: '120px', width: '100%', maxWidth: '728px' }} />
               </div>
             </div>
           </div>

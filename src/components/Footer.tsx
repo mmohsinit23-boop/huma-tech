@@ -6,7 +6,7 @@ export default function Footer() {
     { href: '/about', label: 'About Us' },
     { href: '/contact', label: 'Contact Us' },
     { href: '/blog', label: 'Blog' },
-    { href: '/privacy-policy', label: 'Privacy Policy' },
+    { href: '/privacy', label: 'Privacy Policy' },
     { href: '/terms', label: 'Terms & Conditions' },
     { href: '/disclaimer', label: 'Disclaimer' },
   ];

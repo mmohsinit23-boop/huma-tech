@@ -1,5 +1,6 @@
 import ArticleCard from '@/components/ArticleCard';
 import Newsletter from '@/components/Newsletter';
+import Ad, { AD_SLOTS } from '@/components/Ad';
 import { getFeaturedArticles, getLatestArticles, getTrendingArticles, categories } from '@/lib/data';
 import Link from 'next/link';
 
@@ -54,9 +55,9 @@ export default function Home() {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Ad placeholder */}
-        <div className="ad-placeholder h-[90px] w-full max-w-4xl mx-auto mb-16 text-sm">
-          <span>Advertisement</span>
+        {/* Home top leaderboard ad */}
+        <div className="h-[90px] w-full max-w-4xl mx-auto mb-16 flex justify-center text-sm">
+          <Ad slot={AD_SLOTS.HOME_TOP_LEADERBOARD} style={{ height: '90px', width: '100%', maxWidth: '728px' }} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -111,8 +112,8 @@ export default function Home() {
             </div>
 
             {/* Sidebar Ad */}
-            <div className="ad-placeholder w-full aspect-square sticky top-24 text-sm">
-              <span>Advertisement</span>
+            <div className="w-full aspect-square sticky top-24 flex justify-center text-sm">
+              <Ad slot={AD_SLOTS.HOME_SIDEBAR_SQUARE} style={{ width: '100%', maxWidth: '300px', height: '100%' }} />
             </div>
           </aside>
         </div>
