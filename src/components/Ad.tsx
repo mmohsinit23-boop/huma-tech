@@ -26,6 +26,9 @@ type AdProps = {
  */
 export default function Ad({ slot, style, className }: AdProps) {
   useEffect(() => {
+    // Only attempt to push if slot is valid
+    if (!slot || slot.startsWith('REPLACE_')) return;
+
     try {
       // @ts-ignore
       (window as any).adsbygoogle = (window as any).adsbygoogle || [];
@@ -34,7 +37,12 @@ export default function Ad({ slot, style, className }: AdProps) {
     } catch (e) {
       // Ad blocker or script not loaded — fail silently.
     }
-  }, []);
+  }, [slot]);
+
+  // Don't render empty box if slot ID is not provided
+  if (!slot || slot.startsWith('REPLACE_')) {
+    return null;
+  }
 
   return (
     <ins

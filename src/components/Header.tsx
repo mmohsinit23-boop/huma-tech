@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useTheme } from '@/lib/ThemeContext';
 import SearchModal from './SearchModal';
-import Ad, { AD_SLOTS } from './Ad';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -23,6 +23,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -52,11 +53,6 @@ export default function Header() {
           borderBottom: `1px solid ${scrolled ? 'var(--border-color)' : 'transparent'}`,
         }}
       >
-        {/* Top ad banner (leaderboard) */}
-        <div className="mx-auto max-w-5xl mt-1 mb-1 hidden lg:flex justify-center text-xs">
-          <Ad slot={AD_SLOTS.HEADER_TOP} style={{ height: '50px', width: '100%', maxWidth: '728px' }} />
-        </div>
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
@@ -75,16 +71,23 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="px-3 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-blue-500/10 hover:text-blue-500"
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                      isActive
+                        ? 'text-blue-500 bg-blue-500/10'
+                        : 'hover:bg-blue-500/10 hover:text-blue-500'
+                    }`}
+                    style={{ color: isActive ? 'var(--accent-blue)' : 'var(--text-secondary)' }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Right actions */}
@@ -144,17 +147,24 @@ export default function Header() {
           style={{ backgroundColor: 'var(--bg-primary)', borderTop: '1px solid var(--border-color)' }}
         >
           <nav className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-3 text-sm font-medium rounded-lg transition-colors hover:bg-blue-500/10 hover:text-blue-500"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
+                    isActive
+                      ? 'text-blue-500 bg-blue-500/10'
+                      : 'hover:bg-blue-500/10 hover:text-blue-500'
+                  }`}
+                  style={{ color: isActive ? 'var(--accent-blue)' : 'var(--text-secondary)' }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
         </div>
       </header>

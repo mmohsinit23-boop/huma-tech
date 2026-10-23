@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/lib/ThemeContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -50,10 +51,11 @@ export default function RootLayout({
       <body className={`${inter.variable} font-sans antialiased`}>
         {/* Google AdSense — auto ads + verification meta */}
         <meta name="adsense-client" content={AD_CLIENT} />
-        <script
+        <Script
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${AD_CLIENT}`}
           crossOrigin="anonymous"
+          strategy="afterInteractive"
         />
         <ThemeProvider>
           <div className="min-h-screen flex flex-col" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
